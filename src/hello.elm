@@ -1,6 +1,8 @@
 import Browser
 import Html exposing (..) --(h1, div, p, text)
 import Html.Events exposing (onClick)
+import Bootstrap.CDN as CDN
+import Bootstrap.Grid as Grid
 
 type Msg = Increment | Decrement | Push
 type alias Model = { count : Int , count2 : Int }
@@ -15,12 +17,19 @@ update msg model =
 main =
   Browser.sandbox { init = Model 0 0, update = update, view = view }
 
-view model = 
-  div []
-    [ button [ onClick Increment ] [ text "+" ]
-    , div [] [ text (String.fromInt model.count) ]
-    , button [ onClick Decrement ] [ text "-" ]
-    , div [] []
-    , button [ onClick Push ] [ text "push" ]
-    , div [] [ text (String.fromInt model.count2) ]
+view model =
+  Grid.container []
+    [ CDN.stylesheet
+    , Grid.row []
+        [ Grid.col []
+            [ button [ onClick Increment ] [ text "+" ] ]
+        , Grid.col []
+            [ div [] [ text (String.fromInt model.count) ] ]
+        , Grid.col []
+            [ button [ onClick Decrement ] [ text "-" ] ]
+        ]
+    , Grid.row []
+        [ Grid.col []
+            [ div [ onClick Push ] [ text ("Push:" ++ String.fromInt model.count2) ] ]
+        ]
     ]
