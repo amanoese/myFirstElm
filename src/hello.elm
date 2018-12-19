@@ -1,3 +1,5 @@
+module Main exposing (..)
+
 import Browser
 import Html exposing (..) --(h1, div, p, text)
 import Html.Attributes exposing (..) -- (class..)
