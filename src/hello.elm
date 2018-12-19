@@ -1,8 +1,12 @@
 import Browser
 import Html exposing (..) --(h1, div, p, text)
+import Html.Attributes exposing (..) -- (class..)
 import Html.Events exposing (onClick)
 import Bootstrap.CDN as CDN
 import Bootstrap.Grid as Grid
+import Bootstrap.Grid.Row as Row
+import Bootstrap.Grid.Col as Col
+import Bootstrap.Button as Button
 
 type Msg = Increment | Decrement | Push
 type alias Model = { count : Int , count2 : Int }
@@ -20,16 +24,16 @@ main =
 view model =
   Grid.container []
     [ CDN.stylesheet
-    , Grid.row []
+    , Grid.row [ Row.attrs [ class "text-center align-middle" ] ]
         [ Grid.col []
-            [ button [ onClick Increment ] [ text "+" ] ]
+            [ Button.button [ Button.success, Button.attrs [ onClick Push ] ]  [ text ("Push:" ++ String.fromInt model.count2) ] ]
+        ]
+    , Grid.row [ Row.attrs [ class "text-center align-middle" ] ]
+        [ Grid.col []
+            [ Button.button [ Button.primary, Button.attrs [ onClick Increment ] ] [ text "+" ] ]
         , Grid.col []
             [ div [] [ text (String.fromInt model.count) ] ]
         , Grid.col []
-            [ button [ onClick Decrement ] [ text "-" ] ]
-        ]
-    , Grid.row []
-        [ Grid.col []
-            [ div [ onClick Push ] [ text ("Push:" ++ String.fromInt model.count2) ] ]
+            [ Button.button [ Button.primary, Button.attrs [ onClick Decrement ] ] [ text "-" ] ]
         ]
     ]
